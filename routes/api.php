@@ -15,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('user', [AuthController::class, 'user']);
+// public route without need to authenticate to access it
 Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+
+//use 'auth' middleware from laravel sanctum for authentication
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('user', [AuthController::class, 'user']);
+});
+
